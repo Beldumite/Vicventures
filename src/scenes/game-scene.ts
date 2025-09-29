@@ -67,10 +67,11 @@ export class GameScene extends Phaser.Scene {
     //create layer with all tilesets
     this.groundLayer = this.map.createLayer('Tile Layer 2', [grassTiles, stoneTiles, plantTiles, propsTiles], 0, 0) 
     this.wallLayer = this.map.createLayer('Tile Layer 3', [wallTiles, propsTiles], 0,0)
+    this.wallLayer.setCollisionByExclusion([-1]);
 
     this.player = this.physics.add.sprite(this.scale.width / 2, this.scale.height / 2, 'victini');
     this.player.setCollideWorldBounds(true);
-
+    this.physics.add.collider(this.player, this.wallLayer);
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     
     // Make camera follow the player
